@@ -883,3 +883,6 @@ a.lnk:hover { color: var(--ink); }
   }
   @keyframes noIn { from { opacity: 0; } to { opacity: .06; } }
 }
+
+/* 표 안에서 열 묶음을 가르는 세로선 */
+th.gsep, td.gsep { border-left: 1px solid var(--hair); }
