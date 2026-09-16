@@ -895,3 +895,7 @@ th.gtop { text-align: center; color: var(--ink-2); }
 th.gtop.g1 { color: var(--series-new); }
 th.gtop.g2 { color: var(--series-hi); }
 tbody tr.sum td { border-top: 1px solid var(--hair); font-weight: 700; color: var(--ink); }
+tbody tr.sum td.g1 { background: color-mix(in srgb, var(--series-new) 24%, transparent); }
+tbody tr.sum td.g2 { background: color-mix(in srgb, var(--series-hi)  24%, transparent); }
+/* 숫자만 담긴 표는 넓은 화면에서 칸이 과하게 벌어진다 */
+table.tight { width: auto; min-width: min(100%, 34rem); max-width: 46rem; }
