@@ -905,3 +905,8 @@ table.tight th, table.tight td { padding-left: 10px; padding-right: 10px; }
 /* 띠가 있는 표에서는 강조 행의 이름 칸도 같은 결로 — 빨강이 끼면 줄이 세 색이 된다 */
 table.tight tbody tr.hl td:first-child { background: var(--hair-2); color: var(--ink); }
 table.tight tbody tr.sum td:first-child { background: var(--hair-2); }
+
+/* 넓은 화면에서 문장이 줄 가운데서 시작하지 않게 한다.
+   좁은 화면에서는 줄이 늘어나면 손해이므로 작동하지 않는다. */
+br.wide { display: none; }
+@media (min-width: 901px) { br.wide { display: inline; } }
