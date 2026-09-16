@@ -894,3 +894,4 @@ tbody tr.hl td.g2 { background: color-mix(in srgb, var(--series-hi)  22%, transp
 th.gtop { text-align: center; color: var(--ink-2); }
 th.gtop.g1 { color: var(--series-new); }
 th.gtop.g2 { color: var(--series-hi); }
+tbody tr.sum td { border-top: 1px solid var(--hair); font-weight: 700; color: var(--ink); }
