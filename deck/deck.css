@@ -365,8 +365,7 @@ blockquote.q cite { display: block; margin-top: 14px; font-size: var(--fs-cap); 
 
 /* 표 — 괘선을 덜어낸다 */
 table {
-  /* 넓은 화면에서 끝까지 늘어나면 마지막 열이 눈에서 멀어진다 */
-  width: 100%; max-width: 50rem; border-collapse: collapse; margin: 24px 0 0;
+  width: 100%; border-collapse: collapse; margin: 24px 0 0;
   font-size: var(--fs-cap); font-variant-numeric: tabular-nums;
 }
 thead th {
@@ -898,9 +897,9 @@ th.gtop.g2 { color: var(--series-hi); }
 tbody tr.sum td { border-top: 1px solid var(--hair); font-weight: 700; color: var(--ink); }
 tbody tr.sum td.g1 { background: color-mix(in srgb, var(--series-new) 24%, transparent); }
 tbody tr.sum td.g2 { background: color-mix(in srgb, var(--series-hi)  24%, transparent); }
-/* 숫자만 담긴 표 — 칸이 벌어지면 값이 오른쪽 끝에 붙어 머리글과 멀어진다.
-   폭을 줄이고 값을 가운데로 모은다. 소수점 자릿수가 같아 비교에 지장이 없다. */
-table.tight { width: auto; min-width: min(100%, 30rem); max-width: 38rem; }
+/* 숫자만 담긴 표 — 우측 정렬이면 칸이 벌어질수록 값이 오른쪽 끝에 붙어
+   머리글에서 멀어진다. 폭은 그대로 두고 값을 머리글 아래 가운데로 모은다.
+   네 값 모두 소수점 한 자리라 비교에 지장이 없다. */
 table.tight td.n, table.tight th.n { text-align: center; }
 table.tight th, table.tight td { padding-left: 10px; padding-right: 10px; }
 /* 띠가 있는 표에서는 강조 행의 이름 칸도 같은 결로 — 빨강이 끼면 줄이 세 색이 된다 */
