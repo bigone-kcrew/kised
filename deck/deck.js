@@ -46,6 +46,25 @@ const links = [];
   });
 })();
 
+/* ─── 장(章) 색인 ──────────────────────────────────────────────────
+   data-ch 값이 바뀌는 지점이 장의 첫 슬라이드다. 안건 바로가기가 이걸 쓴다. */
+const chapters = [];
+(function indexChapters(){
+  let last = null;
+  slides.forEach((s, i) => {
+    const c = s.dataset.ch || "";
+    if (c !== last) { chapters.push({ ch: c, i: i }); last = c; }
+  });
+})();
+function chIndex(ch){
+  const hit = chapters.find(c => c.ch === ch);
+  return hit ? hit.i : -1;
+}
+function goCh(ch){
+  const i = chIndex(ch);
+  if (i >= 0) go(i);
+}
+
 /* ─── 이동 ─────────────────────────────────────────────────────── */
 function go(n){
   n = Math.max(0, Math.min(slides.length - 1, n));
@@ -91,6 +110,15 @@ function go(n){
 
   // 모바일 이동 바
   if (mCount) mCount.textContent = (n + 1) + " / " + slides.length;
+
+  // 안건 바로가기 — 현재 장 표시
+  if (jumpLinks.length) {
+    let cur = 0;
+    chapters.forEach((c, k) => { if (c.i <= n) cur = k; });
+    jumpLinks.forEach((a, k) => a.setAttribute("aria-current", k === cur ? "true" : "false"));
+    const act = jumpLinks[cur];
+    if (act && act.offsetParent) act.scrollIntoView({ block: "nearest", inline: "center" });
+  }
   if (document.body.classList.contains("side-on")) openSide(false);
 
   const h = "#/" + (n + 1);
@@ -152,6 +180,34 @@ const mCount = document.getElementById("mCount");
   if (next) next.addEventListener("click", () => go(idx + 1));
   if (menu) menu.addEventListener("click", () => openSide(!document.body.classList.contains("side-on")));
 })();
+
+/* ─── 안건 바로가기 ───────────────────────────────────────────────
+   장 목록에서 자동 생성한다. 어느 슬라이드를 보다가도 안건으로 건너뛸 수 있다. */
+const jump = document.getElementById("jump");
+const jumpLinks = [];
+(function buildJump(){
+  if (!jump) return;
+  chapters.forEach(c => {
+    const a = document.createElement("a");
+    // 「① 임신검진 동행휴가」처럼 원 번호로 시작하면 번호만 쓴다
+    const m = /^([①-⑳])\s*(.*)$/.exec(c.ch);
+    a.textContent = m ? m[1] : c.ch;
+    a.title = c.ch;
+    a.href = "#/" + (c.i + 1);
+    a.dataset.at = String(c.i);
+    a.addEventListener("click", e => { e.preventDefault(); go(c.i); });
+    jump.appendChild(a);
+    jumpLinks.push(a);
+  });
+})();
+
+/* 슬라이드 안에서 data-goto="장 이름" 이 붙은 요소를 누르면 그 장으로 간다 */
+deck.addEventListener("click", e => {
+  const el = e.target.closest("[data-goto]");
+  if (!el) return;
+  e.preventDefault();
+  goCh(el.dataset.goto);
+});
 
 /* ─── 스와이프 ────────────────────────────────────────────────────
    가로 이동이 세로 스크롤보다 뚜렷할 때만 슬라이드를 넘긴다. */

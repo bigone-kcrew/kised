@@ -620,6 +620,35 @@ body.notes-on #notes-drawer { transform: none; }
 }
 @media (max-width: 1000px) { .sim-panel { width: min(340px, 62vw); } }
 
+/* ── 안건 바로가기 ───────────────────────────────────────────────────────
+   어느 슬라이드를 보다가도 안건으로 건너뛴다. 하단 고정, 가로 스크롤. */
+#jump {
+  position: fixed; left: var(--side-w); right: 0; bottom: 0; z-index: 37;
+  display: flex; gap: 2px; align-items: stretch;
+  padding: 0 10px; overflow-x: auto; scrollbar-width: none;
+  background: var(--bg-1); border-top: 1px solid var(--hair-2);
+}
+#jump::-webkit-scrollbar { display: none; }
+#jump a {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+  min-width: 34px; height: 34px; padding: 0 9px;
+  color: var(--ink-3); text-decoration: none;
+  font-size: 14px; font-weight: 600; letter-spacing: .01em;
+  border-bottom: 2px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+#jump a:hover { color: var(--ink); }
+#jump a[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+#jump a:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+
+/* 바로가기 바가 본문·진행바를 가리지 않도록 */
+.slide { padding-bottom: calc(var(--pad-y) + 40px); }
+#prog { bottom: 34px; }
+
+/* 안건 목록 표에서 행을 누르면 그 안건으로 간다 */
+tr[data-goto] { cursor: pointer; }
+tr[data-goto]:hover td { background: var(--bg-2); color: var(--ink); }
+
 /* ── 모바일 이동 바 ──────────────────────────────────────────────────────
    카카오톡 인앱 브라우저 등 키보드가 없는 환경의 이동 수단.
    넓은 화면에서는 숨긴다. */
@@ -655,9 +684,10 @@ body.notes-on #notes-drawer { transform: none; }
   }
   #mMenu { border-inline: 1px solid var(--hair-2); }
 
-  /* 이동 바가 본문을 가리지 않도록 */
-  .slide { padding-bottom: calc(var(--pad-y) + 58px + env(safe-area-inset-bottom, 0px)); }
-  #prog { bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
+  /* 이동 바와 바로가기가 본문을 가리지 않도록 */
+  #jump { bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
+  .slide { padding-bottom: calc(var(--pad-y) + 96px + env(safe-area-inset-bottom, 0px)); }
+  #prog { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* ── 작은 화면 ──────────────────────────────────────────────────────────── */
@@ -716,7 +746,8 @@ body.notes-on #notes-drawer { transform: none; }
           --ink:#000; --ink-2:#1a1a1a; --ink-3:#444;
           --hair:rgba(0,0,0,.3); --hair-2:rgba(0,0,0,.14);
           --accent:#005C87; --series-now:#5E6C82; --series-new:#0071A8; }
-  #side, #sideOpen, #prog, #notes-drawer, #mbar, #sideScrim { display: none !important; }
+  #side, #sideOpen, #prog, #notes-drawer, #mbar, #sideScrim, #jump { display: none !important; }
+  .slide { padding-bottom: var(--pad-y) !important; }
   .deck { position: static; inset: auto; }
   .slide { position: static; inset: auto; opacity: 1 !important; visibility: visible !important;
            transform: none !important; break-after: page; min-height: 100vh; }
