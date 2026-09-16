@@ -193,6 +193,7 @@ body.side-off .deck, body.side-off #prog { left: 0; }
 /* ── 덱 ─────────────────────────────────────────────────────────────────── */
 .deck {
   position: fixed; inset: 0 0 0 var(--side-w);
+  overflow: hidden;
   transition: left var(--dur) var(--ease);
 }
 .slide {
@@ -806,4 +807,68 @@ a.lnk:hover { color: var(--ink); }
            transform: none !important; break-after: page; min-height: 100vh; }
   .slide.is-active .rise, .slide.is-active .materialize, .slide.is-active .draw { animation: none; }
   .box, .diff > div { border: 1px solid #999; }
+}
+
+/* ─── 안건 요구 ────────────────────────────────────────────────────
+   안건마다 첫 장 같은 자리에 같은 모양으로 놓는다.
+   제목 바로 아래에서 「무엇을 해 달라는 것인가」가 한 덩어리로 읽히게 한다. */
+.ask {
+  display: grid; grid-template-columns: auto 1fr;
+  align-items: baseline; gap: 0 12px;
+  margin: 20px 0 0; padding: 12px 15px 13px;
+  max-width: 48ch;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-left: 4px solid var(--accent);
+  font-size: var(--fs-lead); font-weight: 600; line-height: 1.42;
+  letter-spacing: -.022em; color: var(--ink);
+}
+.ask::before {
+  content: "요구"; align-self: start;
+  padding: .26em .5em .3em; margin-top: .12em;
+  font-size: .6em; font-weight: 800; letter-spacing: .06em; line-height: 1;
+  background: var(--accent); color: var(--chip-ink); white-space: nowrap;
+}
+.ask.decide::before { content: "의결"; }
+.ask b { color: var(--accent-ink); }
+/* 요구에 딸리는 사실 한 줄 — 설득하지 않고 그냥 놓아 둔다 */
+.ask .why {
+  display: block; margin-top: 7px;
+  font-size: .76em; font-weight: 500; line-height: 1.46;
+  letter-spacing: -.008em; color: var(--ink-2);
+}
+.ask .why b { color: var(--ink); font-weight: 700; }
+
+/* ─── 안건이 바뀌었다는 신호 ────────────────────────────────────────
+   ① 첫 장 배경의 큰 안건 번호 — 글을 밀지 않도록 흐름 밖에 둔다
+   ② 상단 안건줄이 한 번 반전됐다가 돌아온다 */
+.slide[data-no]::after {
+  content: attr(data-no);
+  position: absolute; z-index: 0; pointer-events: none;
+  right: -.04em; bottom: -.14em;
+  font-size: min(52vh, 50vw); line-height: .78;
+  font-weight: 800; letter-spacing: -.05em;
+  color: var(--accent); opacity: .07;
+}
+.slide[data-no] > * { position: relative; z-index: 1; }
+.slide[data-no].is-active::after { animation: noIn 780ms var(--ease) both; }
+@keyframes noIn {
+  from { opacity: 0; transform: translateX(.1em); }
+  to   { opacity: .07; transform: none; }
+}
+
+#nowch.ch-in { animation: chWash 1150ms var(--ease); }
+@keyframes chWash {
+  0%, 46% { background: var(--accent); color: var(--chip-ink); border-bottom-color: var(--accent); }
+  100%    { background: var(--bg-1); color: var(--accent-ink); border-bottom-color: var(--hair); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide[data-no].is-active::after { animation: none; opacity: .07; }
+  #nowch.ch-in { animation: none; }
+}
+
+@media (max-width: 560px) {
+  .ask { font-size: var(--fs-body); padding: 8px 11px 9px; gap: 0 8px; margin-top: 13px; line-height: 1.38; }
+  .slide[data-no]::after { font-size: min(44vh, 56vw); opacity: .06; }
+  @keyframes noIn { from { opacity: 0; } to { opacity: .06; } }
 }

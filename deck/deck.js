@@ -67,6 +67,8 @@ function goCh(ch){
 }
 
 /* ─── 이동 ─────────────────────────────────────────────────────── */
+let shownCh = null;   // 상단 안건줄에 마지막으로 표시한 장
+
 function go(n){
   n = Math.max(0, Math.min(slides.length - 1, n));
   slides.forEach((s, i) => {
@@ -112,12 +114,20 @@ function go(n){
   // 모바일 이동 바
   if (mCount) mCount.textContent = (n + 1) + " / " + slides.length;
 
-  // 상단 고정 안건명
+  // 상단 고정 안건명 — 안건이 바뀐 순간에 한 번 반전시킨다
   if (nowch) {
     let c = "";
     chapters.forEach(x => { if (x.i <= n) c = x.ch; });
     nowch.textContent = c;
     nowch.hidden = !c || c === "표지";
+    if (c !== shownCh) {
+      shownCh = c;
+      if (!nowch.hidden) {
+        nowch.classList.remove("ch-in");
+        void nowch.offsetWidth;
+        nowch.classList.add("ch-in");
+      }
+    }
   }
 
   // 안건 바로가기 — 현재 장 표시
