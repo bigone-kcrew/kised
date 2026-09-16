@@ -627,14 +627,13 @@ body.notes-on #notes-drawer { transform: none; }
   padding: 7px var(--pad-x) 6px;
   font-size: var(--fs-micro); font-weight: 600; letter-spacing: .01em;
   color: var(--accent-ink);
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--hair-2);
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--hair);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 #nowch[hidden] { display: none; }
 /* 안건줄이 본문 첫 줄에 붙지 않도록 바 높이만큼 더 띄운다 */
-.slide { padding-top: calc(var(--pad-y) + 34px); }
+.slide { padding-top: calc(var(--pad-y) + 46px); }
 
 /* ── 안건 바로가기 ───────────────────────────────────────────────────────
    어느 슬라이드를 보다가도 안건으로 건너뛴다. 하단 고정, 가로 스크롤. */
@@ -676,8 +675,11 @@ tr[data-goto]:hover td { background: var(--bg-2); color: var(--ink); }
 .logo { display: block; max-width: 100%; height: auto; filter: brightness(0) invert(1); }
 :root[data-theme="light"] .logo { filter: none; }
 
-.cover .logo { width: min(400px, 58vw); margin: 0 0 clamp(20px, 3.4vh, 38px); }
-.side-logo { width: 148px; margin-bottom: 14px; }
+/* 원본 PNG는 위아래 여백이 커서 그대로 쓰면 자리를 크게 차지한다.
+   로고가 놓인 가로 띠만 잘라 쓴다. */
+.cover .logo, .side-logo { aspect-ratio: 6.4; object-fit: cover; object-position: center 51%; }
+.cover .logo { width: min(330px, 58vw); margin: 0 0 clamp(16px, 2.6vh, 30px); }
+.side-logo { width: 156px; margin-bottom: 12px; }
 
 /* 제기 이력 표식 — 과거 노사협의회에서 다뤄진 적이 있는지 */
 .hist {
@@ -787,8 +789,8 @@ a.lnk:hover { color: var(--ink); }
 
   .pageno { display: none; }
   /* 좁은 화면에서는 안건줄과 본문이 더 가까워 보이므로 여유를 더 준다 */
-  .slide { padding-top: calc(var(--pad-y) + 48px); }
-  .side-logo { width: 130px; }
+  .slide { padding-top: calc(var(--pad-y) + 62px); }
+  .cover .logo { width: min(250px, 62vw); }
 }
 
 /* ── 인쇄 ───────────────────────────────────────────────────────────────── */
