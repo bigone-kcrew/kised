@@ -29,15 +29,15 @@
   --hair:      rgba(245,245,247,.16);
   --hair-2:    rgba(245,245,247,.075);
 
-  --accent:    #64D2FF;
-  --accent-2:  #0A84FF;
-  --accent-ink:#64D2FF;
+  --accent:    #FF5C5C;   /*  6.1:1 (순흑) — 노동조합 상징색 */
+  --accent-2:  #E8323C;
+  --accent-ink:#FF7B7B;   /*  8.0:1 — 본문에 섞이는 강조 글자 */
 
   --ok:        #30D158;
   --warn:      #FF9F0A;
   --danger:    #FF453A;
   --text-1:    #F5F5F7;   /* Canvas FX 가 읽는 이름 */
-  --chip-ink:  #00131C;   /* 강조 칩 안의 글자 — 밝은 강조색 위 어두운 글자 */
+  --chip-ink:  #FFFFFF;   /* 강조 칩 안의 글자 — 빨강 위 흰 글자 */
   --chip-ink-hi: #241300;
 
   /* 차트 계열 — dataviz 검증기 통과(색맹 ΔE 23.4 · 정상시 24.9)
@@ -80,8 +80,8 @@
   --ink-2:#36363C;            /* 12.0 / 10.7:1 */
   --ink-3:#4A4A52;            /*  8.8 /  7.8:1 — 본문 최저선 */
   --hair:rgba(17,17,20,.22); --hair-2:rgba(17,17,20,.10);
-  --accent:#005075;           /*  8.7 /  7.8:1 */
-  --accent-2:#003F5C; --accent-ink:#005075;
+  --accent:#C1121F;           /*  7.3 /  6.5:1 — 노동조합 상징색 */
+  --accent-2:#8E0D17; --accent-ink:#A50F1A;
   --ok:#136B30; --warn:#704005; --danger:#96201A; --text-1:#111114;
   /* 차트 — dataviz 검증기: 색맹 ΔE 25.9 · 정상시 28.2 (기준 8·15 통과).
      현행 계열의 배경 대비 2.88:1 경고는 모든 차트에 값을 직접 라벨로 붙여 해소한다. */
@@ -620,6 +620,21 @@ body.notes-on #notes-drawer { transform: none; }
 }
 @media (max-width: 1000px) { .sim-panel { width: min(340px, 62vw); } }
 
+/* ── 현재 안건 고정 표시 ─────────────────────────────────────────────────
+   지금 보는 슬라이드가 어느 안건인지 항상 알 수 있게 한다. */
+#nowch {
+  position: fixed; top: 0; left: var(--side-w); right: 0; z-index: 36;
+  padding: 7px var(--pad-x) 6px;
+  font-size: var(--fs-micro); font-weight: 600; letter-spacing: .01em;
+  color: var(--accent-ink);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hair-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#nowch[hidden] { display: none; }
+.slide { padding-top: calc(var(--pad-y) + 14px); }
+
 /* ── 안건 바로가기 ───────────────────────────────────────────────────────
    어느 슬라이드를 보다가도 안건으로 건너뛴다. 하단 고정, 가로 스크롤. */
 #jump {
@@ -654,6 +669,16 @@ body.notes-on #notes-drawer { transform: none; }
 /* 안건 목록 표에서 행을 누르면 그 안건으로 간다 */
 tr[data-goto] { cursor: pointer; }
 tr[data-goto]:hover td { background: var(--bg-2); color: var(--ink); }
+
+/* 제기 이력 표식 — 과거 노사협의회에서 다뤄진 적이 있는지 */
+.hist {
+  display: inline-block; margin-left: 10px; padding: 2px 8px;
+  font-size: .78em; font-weight: 600; letter-spacing: .01em;
+  color: var(--warn); background: color-mix(in srgb, var(--warn) 15%, transparent);
+  vertical-align: 2px;
+}
+.hist.new { color: var(--ink-3); background: var(--hair-2); }
+td .hist { margin-left: 0; margin-top: 3px; vertical-align: baseline; }
 
 /* 본문 안의 외부 링크 */
 a.lnk {

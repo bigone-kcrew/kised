@@ -9,6 +9,7 @@ const deck   = document.getElementById("deck");
 const slides = Array.from(deck.querySelectorAll(".slide"));
 const nav    = document.getElementById("nav");
 const bar    = document.querySelector("#prog > span");
+const nowch  = document.getElementById("nowch");
 const drawer = document.getElementById("notes-drawer");
 const nbody  = document.getElementById("notes-body");
 const RM     = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -110,6 +111,14 @@ function go(n){
 
   // 모바일 이동 바
   if (mCount) mCount.textContent = (n + 1) + " / " + slides.length;
+
+  // 상단 고정 안건명
+  if (nowch) {
+    let c = "";
+    chapters.forEach(x => { if (x.i <= n) c = x.ch; });
+    nowch.textContent = c;
+    nowch.hidden = !c || c === "표지";
+  }
 
   // 안건 바로가기 — 현재 장 표시
   if (jumpLinks.length) {
