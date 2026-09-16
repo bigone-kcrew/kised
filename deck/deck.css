@@ -783,8 +783,10 @@ a.lnk:hover { color: var(--ink); }
 
   /* 열 분할은 전부 1열로 */
   .cols, .cols.c2, .cols.c3, .cols.c2-1 { grid-template-columns: 1fr; gap: 12px; }
-  .vs { grid-template-columns: 1fr; gap: 10px; }
-  .vs .mid { display: none; }
+  .vs { grid-template-columns: 1fr; gap: 6px; }
+  /* 가로 화살표는 세로 배치에서 뜻이 어긋난다. 아래로 돌려 둔다 */
+  .vs .mid { display: block; font-size: 0; line-height: 1; }
+  .vs .mid::before { content: "↓"; font-size: var(--fs-mid); }
   .stat-row { flex-direction: column; gap: 14px; }
 
   /* 신구대조는 위아래로 */
