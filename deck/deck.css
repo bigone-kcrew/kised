@@ -673,14 +673,15 @@ tr[data-goto]:hover td { background: var(--bg-2); color: var(--ink); }
 
 /* 로고 — 원본은 글자가 어두운 회색이라 어두운 화면에서 보이지 않는다.
    어두운 화면에서는 흰색 실루엣으로, 밝은 화면에서는 원본 색으로 쓴다. */
-.logo { display: block; max-width: 100%; height: auto; filter: brightness(0) invert(1); }
-:root[data-theme="light"] .logo { filter: none; }
+.logo { display: block; max-width: 100%; height: auto; }
+.logo-l { display: none; }
+:root[data-theme="light"] .logo-d { display: none; }
+:root[data-theme="light"] .logo-l { display: block; }
 
 /* 원본 PNG는 위아래 여백이 커서 그대로 쓰면 자리를 크게 차지한다.
    로고가 놓인 가로 띠만 잘라 쓴다. */
-.cover .logo, .side-logo { aspect-ratio: 6.4; object-fit: cover; object-position: center 51%; }
-.cover .logo { width: min(330px, 58vw); margin: 0 0 clamp(16px, 2.6vh, 30px); }
-.side-logo { width: 156px; margin-bottom: 12px; }
+.cover .logo { width: min(250px, 46vw); margin: 0 0 clamp(14px, 2.2vh, 24px); }
+.side-logo { width: 128px; margin-bottom: 12px; }
 
 /* 제기 이력 표식 — 과거 노사협의회에서 다뤄진 적이 있는지 */
 .hist {
@@ -791,7 +792,7 @@ a.lnk:hover { color: var(--ink); }
   .pageno { display: none; }
   /* 좁은 화면에서는 안건줄과 본문이 더 가까워 보이므로 여유를 더 준다 */
   .slide { padding-top: calc(var(--pad-y) + 50px); }
-  .cover .logo { width: min(250px, 62vw); }
+  .cover .logo { width: min(196px, 50vw); margin-bottom: 14px; }
 }
 
 /* ── 인쇄 ───────────────────────────────────────────────────────────────── */
@@ -813,8 +814,7 @@ a.lnk:hover { color: var(--ink); }
    안건마다 첫 장 같은 자리에 같은 모양으로 놓는다.
    제목 바로 아래에서 「무엇을 해 달라는 것인가」가 한 덩어리로 읽히게 한다. */
 .ask {
-  display: grid; grid-template-columns: auto 1fr;
-  align-items: baseline; gap: 0 12px;
+  display: block;
   margin: 20px 0 0; padding: 12px 15px 13px;
   max-width: 48ch;
   background: color-mix(in srgb, var(--accent) 10%, transparent);
@@ -822,9 +822,10 @@ a.lnk:hover { color: var(--ink); }
   font-size: var(--fs-lead); font-weight: 600; line-height: 1.42;
   letter-spacing: -.022em; color: var(--ink);
 }
+/* 꼬리표는 첫 줄 안에 흘려 둔다. 칸을 나누면 뒤따르는 블록이 좁은 칸으로 빠진다 */
 .ask::before {
-  content: "요구"; align-self: start;
-  padding: .26em .5em .3em; margin-top: .12em;
+  content: "요구"; display: inline-block; vertical-align: .14em;
+  padding: .3em .52em .34em; margin-right: 9px;
   font-size: .6em; font-weight: 800; letter-spacing: .06em; line-height: 1;
   background: var(--accent); color: var(--chip-ink); white-space: nowrap;
 }
@@ -868,7 +869,8 @@ a.lnk:hover { color: var(--ink); }
 }
 
 @media (max-width: 560px) {
-  .ask { font-size: var(--fs-body); padding: 8px 11px 9px; gap: 0 8px; margin-top: 13px; line-height: 1.38; }
+  .ask { font-size: var(--fs-body); padding: 8px 11px 9px; margin-top: 13px; line-height: 1.38; }
+  .ask::before { margin-right: 7px; }
   .slide[data-no]::after { font-size: min(44vh, 56vw); opacity: .06; }
   @keyframes noIn { from { opacity: 0; } to { opacity: .06; } }
 }
