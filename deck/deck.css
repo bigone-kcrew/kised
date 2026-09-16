@@ -897,5 +897,11 @@ th.gtop.g2 { color: var(--series-hi); }
 tbody tr.sum td { border-top: 1px solid var(--hair); font-weight: 700; color: var(--ink); }
 tbody tr.sum td.g1 { background: color-mix(in srgb, var(--series-new) 24%, transparent); }
 tbody tr.sum td.g2 { background: color-mix(in srgb, var(--series-hi)  24%, transparent); }
-/* 숫자만 담긴 표는 넓은 화면에서 칸이 과하게 벌어진다 */
-table.tight { width: auto; min-width: min(100%, 34rem); max-width: 46rem; }
+/* 숫자만 담긴 표 — 칸이 벌어지면 값이 오른쪽 끝에 붙어 머리글과 멀어진다.
+   폭을 줄이고 값을 가운데로 모은다. 소수점 자릿수가 같아 비교에 지장이 없다. */
+table.tight { width: auto; min-width: min(100%, 30rem); max-width: 38rem; }
+table.tight td.n, table.tight th.n { text-align: center; }
+table.tight th, table.tight td { padding-left: 10px; padding-right: 10px; }
+/* 띠가 있는 표에서는 강조 행의 이름 칸도 같은 결로 — 빨강이 끼면 줄이 세 색이 된다 */
+table.tight tbody tr.hl td:first-child { background: var(--hair-2); color: var(--ink); }
+table.tight tbody tr.sum td:first-child { background: var(--hair-2); }
