@@ -624,7 +624,7 @@ body.notes-on #notes-drawer { transform: none; }
    지금 보는 슬라이드가 어느 안건인지 항상 알 수 있게 한다. */
 #nowch {
   position: fixed; top: 0; left: var(--side-w); right: 0; z-index: 36;
-  padding: 7px var(--pad-x) 6px;
+  padding: 5px var(--pad-x) 5px;
   font-size: var(--fs-micro); font-weight: 600; letter-spacing: .01em;
   color: var(--accent-ink);
   background: var(--bg-1);
@@ -633,7 +633,7 @@ body.notes-on #notes-drawer { transform: none; }
 }
 #nowch[hidden] { display: none; }
 /* 안건줄이 본문 첫 줄에 붙지 않도록 바 높이만큼 더 띄운다 */
-.slide { padding-top: calc(var(--pad-y) + 46px); }
+.slide { padding-top: calc(var(--pad-y) + 40px); }
 
 /* ── 안건 바로가기 ───────────────────────────────────────────────────────
    어느 슬라이드를 보다가도 안건으로 건너뛴다. 하단 고정, 가로 스크롤. */
@@ -646,7 +646,7 @@ body.notes-on #notes-drawer { transform: none; }
 #jump::-webkit-scrollbar { display: none; }
 #jump a {
   flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
-  min-width: 34px; height: 34px; padding: 0 9px;
+  min-width: 32px; height: 30px; padding: 0 8px;
   color: var(--ink-3); text-decoration: none;
   font-size: 14px; font-weight: 600; letter-spacing: .01em;
   border-bottom: 2px solid transparent;
@@ -663,8 +663,8 @@ body.notes-on #notes-drawer { transform: none; }
 #jump a.out::after { content: "↗"; margin-left: 4px; font-size: 12px; }
 
 /* 바로가기 바가 본문·진행바를 가리지 않도록 */
-.slide { padding-bottom: calc(var(--pad-y) + 40px); }
-#prog { bottom: 34px; }
+.slide { padding-bottom: calc(var(--pad-y) + 36px); }
+#prog { bottom: 30px; }
 
 /* 안건 목록 표에서 행을 누르면 그 안건으로 간다 */
 tr[data-goto] { cursor: pointer; }
@@ -720,7 +720,7 @@ a.lnk:hover { color: var(--ink); }
   }
   #mbar button {
     display: flex; align-items: center; justify-content: center; gap: 6px;
-    min-height: 52px; padding: 0 14px;
+    min-height: 46px; padding: 0 12px;
     background: none; border: 0; cursor: pointer;
     color: var(--ink-2); font: inherit; font-size: 15px; font-weight: 600;
     -webkit-tap-highlight-color: transparent;
@@ -735,9 +735,9 @@ a.lnk:hover { color: var(--ink); }
   #mMenu { border-inline: 1px solid var(--hair-2); }
 
   /* 이동 바와 바로가기가 본문을 가리지 않도록 */
-  #jump { bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
-  .slide { padding-bottom: calc(var(--pad-y) + 96px + env(safe-area-inset-bottom, 0px)); }
-  #prog { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+  #jump { bottom: calc(46px + env(safe-area-inset-bottom, 0px)); }
+  .slide { padding-bottom: calc(var(--pad-y) + 84px + env(safe-area-inset-bottom, 0px)); }
+  #prog { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* ── 작은 화면 ──────────────────────────────────────────────────────────── */
@@ -764,7 +764,7 @@ a.lnk:hover { color: var(--ink); }
     --fs-stat: clamp(44px, 15vw, 78px);
     --fs-cap:  clamp(12px, 3.4vw, 15px);
     --pad-x: 5.5vw;
-    --pad-y: 22px;
+    --pad-y: 16px;
   }
 
   /* 넘치는 내용은 위에서부터 쌓고 세로로 스크롤한다 */
@@ -789,7 +789,7 @@ a.lnk:hover { color: var(--ink); }
 
   .pageno { display: none; }
   /* 좁은 화면에서는 안건줄과 본문이 더 가까워 보이므로 여유를 더 준다 */
-  .slide { padding-top: calc(var(--pad-y) + 62px); }
+  .slide { padding-top: calc(var(--pad-y) + 50px); }
   .cover .logo { width: min(250px, 62vw); }
 }
 
