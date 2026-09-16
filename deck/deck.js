@@ -199,6 +199,16 @@ const jumpLinks = [];
     jump.appendChild(a);
     jumpLinks.push(a);
   });
+  // 안건 전문으로 나가는 링크 — 바로가기 바 끝에 둔다
+  const doc = document.getElementById("docLink");
+  if (doc) {
+    const out = document.createElement("a");
+    out.className = "out";
+    out.href = doc.getAttribute("href");
+    out.textContent = "전문";
+    out.title = "안건 전문 보기";
+    jump.appendChild(out);
+  }
 })();
 
 /* 슬라이드 안에서 data-goto="장 이름" 이 붙은 요소를 누르면 그 장으로 간다 */

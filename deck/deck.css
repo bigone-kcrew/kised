@@ -640,6 +640,12 @@ body.notes-on #notes-drawer { transform: none; }
 #jump a:hover { color: var(--ink); }
 #jump a[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 #jump a:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+/* 안건 전문으로 나가는 링크 — 바로가기와 구분되게 왼쪽에 칸막이를 둔다 */
+#jump a.out {
+  margin-left: auto; padding-left: 14px;
+  border-left: 1px solid var(--hair); color: var(--accent);
+}
+#jump a.out::after { content: "↗"; margin-left: 4px; font-size: 12px; }
 
 /* 바로가기 바가 본문·진행바를 가리지 않도록 */
 .slide { padding-bottom: calc(var(--pad-y) + 40px); }
@@ -648,6 +654,14 @@ body.notes-on #notes-drawer { transform: none; }
 /* 안건 목록 표에서 행을 누르면 그 안건으로 간다 */
 tr[data-goto] { cursor: pointer; }
 tr[data-goto]:hover td { background: var(--bg-2); color: var(--ink); }
+
+/* 본문 안의 외부 링크 */
+a.lnk {
+  color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid currentColor; padding-bottom: 1px;
+}
+a.lnk::after { content: "↗"; margin-left: 3px; font-size: .85em; }
+a.lnk:hover { color: var(--ink); }
 
 /* ── 모바일 이동 바 ──────────────────────────────────────────────────────
    카카오톡 인앱 브라우저 등 키보드가 없는 환경의 이동 수단.
