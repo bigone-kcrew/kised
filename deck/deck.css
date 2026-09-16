@@ -670,6 +670,46 @@ body.notes-on #notes-drawer { transform: none; }
   #sideOpen { display: flex; }
 }
 
+/* ── 세로 화면 (휴대폰) ──────────────────────────────────────────────────
+   원본은 글자 크기를 vh 로만 잡는다. 세로로 긴 화면(예: 393×852)에서는
+   높이 기준으로 글자가 커지는데 폭이 좁아 어절이 한 줄을 넘고 줄바꿈이 무너진다.
+   폭 기준을 함께 걸고, 넘치는 내용은 스크롤되게 한다. */
+@media (max-width: 560px) {
+  :root {
+    --fs-body: clamp(15px, 4.2vw, 19px);
+    --fs-lead: clamp(17px, 5.0vw, 23px);
+    --fs-mid:  clamp(21px, 6.4vw, 31px);
+    --fs-big:  clamp(25px, 7.8vw, 38px);
+    --fs-huge: clamp(30px, 9.4vw, 46px);
+    --fs-stat: clamp(44px, 15vw, 78px);
+    --fs-cap:  clamp(12px, 3.4vw, 15px);
+    --pad-x: 5.5vw;
+    --pad-y: 22px;
+  }
+
+  /* 넘치는 내용은 위에서부터 쌓고 세로로 스크롤한다 */
+  .slide { align-content: start; overflow-y: auto; overscroll-behavior: contain; }
+  .slide.cover, .slide.divider, .slide.center { align-content: center; }
+
+  /* 폭 제한을 푼다 — ch 단위 제한이 좁은 화면에서는 오히려 방해가 된다 */
+  .title, .lead, .body, .cap { max-width: none; }
+
+  /* 표 — 4열 이상은 세로에서 읽히지 않는다. 글자를 줄이고 여백을 좁힌다 */
+  table { font-size: clamp(12px, 3.2vw, 15px); }
+  th, td { padding: 7px 8px; }
+
+  /* 열 분할은 전부 1열로 */
+  .cols, .cols.c2, .cols.c3, .cols.c2-1 { grid-template-columns: 1fr; gap: 12px; }
+  .vs { grid-template-columns: 1fr; gap: 10px; }
+  .vs .mid { display: none; }
+  .stat-row { flex-direction: column; gap: 14px; }
+
+  /* 신구대조는 위아래로 */
+  .diff { grid-template-columns: 1fr; }
+
+  .pageno { display: none; }
+}
+
 /* ── 인쇄 ───────────────────────────────────────────────────────────────── */
 @media print {
   :root { color-scheme: light; --bg:#fff; --bg-1:#fff; --bg-2:#fff; --bg-3:#eee;
