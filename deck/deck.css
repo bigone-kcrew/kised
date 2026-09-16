@@ -365,7 +365,8 @@ blockquote.q cite { display: block; margin-top: 14px; font-size: var(--fs-cap); 
 
 /* 표 — 괘선을 덜어낸다 */
 table {
-  width: 100%; border-collapse: collapse; margin: 24px 0 0;
+  /* 넓은 화면에서 끝까지 늘어나면 마지막 열이 눈에서 멀어진다 */
+  width: 100%; max-width: 50rem; border-collapse: collapse; margin: 24px 0 0;
   font-size: var(--fs-cap); font-variant-numeric: tabular-nums;
 }
 thead th {

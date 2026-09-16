@@ -22,8 +22,11 @@
 
   U.canvas = (el) => {
     if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+    // 캔버스를 그냥 붙이면 절대배치라 본문 위를 덮는다.
+    // 쌓임 맥락을 가두고 음수 층으로 내려 배경으로만 쓴다.
+    el.style.isolation = 'isolate';
     const c = document.createElement('canvas');
-    c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:block;';
+    c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:block;z-index:-1;';
     el.appendChild(c);
     const ctx = c.getContext('2d');
     let w = 0, h = 0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio||1));
