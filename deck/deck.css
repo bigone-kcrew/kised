@@ -884,5 +884,13 @@ a.lnk:hover { color: var(--ink); }
   @keyframes noIn { from { opacity: 0; } to { opacity: .06; } }
 }
 
-/* 표 안에서 열 묶음을 가르는 세로선 */
-th.gsep, td.gsep { border-left: 1px solid var(--hair); }
+/* ─── 표의 열 묶음 ─────────────────────────────────────────────────
+   같은 묶음은 같은 색 띠로 묶는다. 현행과 개선을 나란히 두었으므로
+   눈이 띠 안에서만 좌우로 움직이면 전후 비교가 끝난다. */
+th.g1, td.g1 { background: color-mix(in srgb, var(--series-new) 10%, transparent); }
+th.g2, td.g2 { background: color-mix(in srgb, var(--series-hi)  10%, transparent); }
+tbody tr.hl td.g1 { background: color-mix(in srgb, var(--series-new) 22%, transparent); }
+tbody tr.hl td.g2 { background: color-mix(in srgb, var(--series-hi)  22%, transparent); }
+th.gtop { text-align: center; color: var(--ink-2); }
+th.gtop.g1 { color: var(--series-new); }
+th.gtop.g2 { color: var(--series-hi); }
