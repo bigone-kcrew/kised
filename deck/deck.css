@@ -633,7 +633,8 @@ body.notes-on #notes-drawer { transform: none; }
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 #nowch[hidden] { display: none; }
-.slide { padding-top: calc(var(--pad-y) + 14px); }
+/* 안건줄이 본문 첫 줄에 붙지 않도록 바 높이만큼 더 띄운다 */
+.slide { padding-top: calc(var(--pad-y) + 34px); }
 
 /* ── 안건 바로가기 ───────────────────────────────────────────────────────
    어느 슬라이드를 보다가도 안건으로 건너뛴다. 하단 고정, 가로 스크롤. */
@@ -669,6 +670,14 @@ body.notes-on #notes-drawer { transform: none; }
 /* 안건 목록 표에서 행을 누르면 그 안건으로 간다 */
 tr[data-goto] { cursor: pointer; }
 tr[data-goto]:hover td { background: var(--bg-2); color: var(--ink); }
+
+/* 로고 — 원본은 글자가 어두운 회색이라 어두운 화면에서 보이지 않는다.
+   어두운 화면에서는 흰색 실루엣으로, 밝은 화면에서는 원본 색으로 쓴다. */
+.logo { display: block; max-width: 100%; height: auto; filter: brightness(0) invert(1); }
+:root[data-theme="light"] .logo { filter: none; }
+
+.cover .logo { width: min(400px, 58vw); margin: 0 0 clamp(20px, 3.4vh, 38px); }
+.side-logo { width: 148px; margin-bottom: 14px; }
 
 /* 제기 이력 표식 — 과거 노사협의회에서 다뤄진 적이 있는지 */
 .hist {
@@ -777,6 +786,9 @@ a.lnk:hover { color: var(--ink); }
   .diff { grid-template-columns: 1fr; }
 
   .pageno { display: none; }
+  /* 좁은 화면에서는 안건줄과 본문이 더 가까워 보이므로 여유를 더 준다 */
+  .slide { padding-top: calc(var(--pad-y) + 48px); }
+  .side-logo { width: 130px; }
 }
 
 /* ── 인쇄 ───────────────────────────────────────────────────────────────── */
