@@ -166,7 +166,8 @@ function toggleNotes(){
   }
 }
 function toggleSide(){
-  const hid = document.body.classList.toggle("hide-side");
+  // CSS 는 body.side-off 를 본다. 이름이 어긋나면 버튼만 바뀌고 목차는 그대로다.
+  const hid = document.body.classList.toggle("side-off");
   document.getElementById("sideOpen").hidden = !hid;
   if (hid) document.getElementById("sideOpen").focus();
   else document.getElementById("btnSide").focus();
