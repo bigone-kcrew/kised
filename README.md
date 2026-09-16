@@ -3,7 +3,13 @@
 창업진흥원 노동조합이 2026. 9. 28. 3분기 노사협의회 정기회의에 상정할 노측 안건 10건의
 실무협의용 발표자료.
 
-**웹** → https://bigone-kcrew.github.io/kised/
+| 문서 | 주소 |
+| --- | --- |
+| 발표자료 (슬라이드) | https://bigone-kcrew.github.io/kised/ |
+| 안건 전문 | https://bigone-kcrew.github.io/kised/agenda.html |
+
+발표자료는 요약입니다. 근거 조문과 세부 요구는 **안건 전문**에 있습니다.
+슬라이드 왼쪽 아래 문서 아이콘으로도 갈 수 있습니다.
 
 ## 보는 법
 
