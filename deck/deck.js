@@ -267,6 +267,9 @@ function applyTheme(t){
   else document.documentElement.removeAttribute("data-theme");
   const b = document.getElementById("btnTheme");
   if (b) b.title = (t === "light" ? "어두운 화면 전환 (T)" : "밝은 화면 전환 (T)");
+  // 캔버스 효과는 만들어질 때 색을 한 번 읽는다. 테마가 바뀌면 다시 만든다.
+  const act = document.querySelector(".slide.is-active");
+  if (act && window.__hpxReinit) requestAnimationFrame(() => window.__hpxReinit(act));
 }
 function toggleTheme(){
   const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";

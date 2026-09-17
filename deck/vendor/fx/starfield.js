@@ -4,12 +4,13 @@
     const U = window.HPX._u;
     const k = U.canvas(el), ctx = k.ctx;
     const tx = U.text(el, '#ffffff');
+    const fade = U.fade(el, 0.25);
     const N = 260;
     const stars = Array.from({length:N}, () => ({
       x: U.rand(-1,1), y: U.rand(-1,1), z: Math.random()
     }));
     const stop = U.loop(() => {
-      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.fillStyle = fade;
       ctx.fillRect(0,0,k.w,k.h);
       const cx = k.w/2, cy = k.h/2;
       for (const s of stars){

@@ -909,3 +909,8 @@ table.tight tbody tr.sum td:first-child { background: var(--hair-2); }
 /* 문장이 줄 가운데서 시작하지 않게 한다. 좁은 화면에서도 같다 —
    줄이 하나 늘더라도 문장 경계가 보이는 쪽이 읽기 쉽다. */
 br.wide { display: inline; }
+
+/* 본문의 em — 한글에 기울임은 어색하다. 색으로만 강조한다 */
+.cap em, .body em, .lead em, .gj em, .box em, .ask em {
+  font-style: normal; font-weight: 700; color: var(--accent-ink);
+}

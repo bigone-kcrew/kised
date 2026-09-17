@@ -11,6 +11,17 @@
   U.accent = (el, fb) => U.css(el, '--accent', fb || '#7c5cff');
   U.accent2 = (el, fb) => U.css(el, '--accent-2', fb || '#22d3ee');
   U.text = (el, fb) => U.css(el, '--text-1', fb || '#eaeaf2');
+  // 잔상용 배경색 — 밝은 화면에서 검정을 칠하면 표지가 어두워진다.
+  // 현재 테마의 --bg 를 읽어 같은 색으로 옅게 덮는다.
+  U.fade = (el, a) => {
+    const c = (U.css(el, '--bg', '#000000') || '#000000').trim();
+    const m = c.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (!m) return c;
+    let h = m[1];
+    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    const n = parseInt(h, 16);
+    return 'rgba(' + ((n>>16)&255) + ',' + ((n>>8)&255) + ',' + (n&255) + ',' + a + ')';
+  };
 
   U.palette = (el) => [
     U.accent(el, '#7c5cff'),
